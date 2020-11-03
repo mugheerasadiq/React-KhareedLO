@@ -43,12 +43,6 @@ const Header = () => {
                 <a className="dropdown-item" href="shop.html">
                   Shop
                 </a>
-                <a className="dropdown-item" href="wishlist.html">
-                  Wishlist
-                </a>
-                <a className="dropdown-item" href="product-single.html">
-                  Single Product
-                </a>
                 <a className="dropdown-item" href="cart.html">
                   Cart
                 </a>
@@ -63,13 +57,18 @@ const Header = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a href="blog.html" className="nav-link">
-                Blog
+              <a href="contact.html" className="nav-link">
+                Contact
               </a>
             </li>
             <li className="nav-item">
-              <a href="contact.html" className="nav-link">
-                Contact
+              <a href="blog.html" className="nav-link">
+                Login
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="blog.html" className="nav-link">
+                SignUP
               </a>
             </li>
             <li className="nav-item cta cta-colored">

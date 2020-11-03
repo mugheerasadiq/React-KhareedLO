@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import Main from "./views/Main/Main.index";
+import "react-credit-cards/es/styles-compiled.css";
 
 ReactDOM.render(
   <React.StrictMode>

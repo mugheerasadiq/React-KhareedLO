@@ -1,7 +1,6 @@
 import React from "react";
 import ContactFormSchema from "../Validations/ContactForm.validation";
 import { Formik } from "formik";
-import * as Yup from "yup";
 
 const ContactForm = () => {
   return (
