@@ -1,13 +1,14 @@
 import React from "react";
 import { Vegetables } from "../../shared/Vegetables";
 import Product from "../../components/product/product.index";
+import { Link } from "react-router-dom";
 
 const FruitShop = () => {
   return (
     <div>
       <div
         className="hero-wrap hero-bread"
-        style={{ backgroundImage: "url(assests/images/bg_1.jpg)" }}
+        style={{ backgroundImage: "url(../../assests/images/bg_1.jpg)" }}
       >
         <div className="container">
           <div className="row no-gutters slider-text align-items-center justify-content-center">
@@ -30,18 +31,18 @@ const FruitShop = () => {
             <div className="col-md-10 mb-5 text-center">
               <ul className="product-category">
                 <li>
-                  <a href="#">Vegetables</a>
+                  <Link to="/vegetableshop">Vegetables</Link>
                 </li>
                 <li>
-                  <a href="#" className="active">
+                  <Link to="/fruitShop" className="active">
                     Fruits
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">Juice</a>
+                  <Link to="/juiceShop">Juice</Link>
                 </li>
                 <li>
-                  <a href="#">Dried</a>
+                  <Link to="driedShop">Dried</Link>
                 </li>
               </ul>
             </div>

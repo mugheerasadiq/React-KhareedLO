@@ -1,13 +1,14 @@
-import React from "react";
-import { Vegetables } from "../../shared/Vegetables";
+import React, { useState } from "react";
 import Product from "../../components/product/product.index";
+import { Vegetables } from "../../shared/Vegetables";
+import { Link } from "react-router-dom";
 
 const VegetableShop = () => {
   return (
-    <div>
+    <React.Fragment>
       <div
         className="hero-wrap hero-bread"
-        style={{ backgroundImage: "url(assests/images/bg_1.jpg)" }}
+        style={{ backgroundImage: "url(../../assests/images/bg_1.jpg)" }}
       >
         <div className="container">
           <div className="row no-gutters slider-text align-items-center justify-content-center">
@@ -30,22 +31,24 @@ const VegetableShop = () => {
             <div className="col-md-10 mb-5 text-center">
               <ul className="product-category">
                 <li>
-                  <a href="#" className="active">
+                  <Link to="/vegetableshop" className="active">
                     Vegetables
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">Fruits</a>
+                  <Link to="/fruitShop">Fruits</Link>
                 </li>
                 <li>
-                  <a href="#">Juice</a>
+                  <Link to="/juiceShop">Juice</Link>
                 </li>
                 <li>
-                  <a href="#">Dried</a>
+                  <Link to="driedShop">Dried</Link>
                 </li>
               </ul>
             </div>
           </div>
+
+          {console.log(<Product ProductData={Vegetables} />)}
 
           <Product ProductData={Vegetables} />
 
@@ -80,7 +83,7 @@ const VegetableShop = () => {
           </div>
         </div>
       </section>
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -7,9 +8,9 @@ const Header = () => {
       id="ftco-navbar"
     >
       <div className="container">
-        <a className="navbar-brand" href="index.html">
+        <Link className="navbar-brand" to="/">
           Khareed LO
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -24,9 +25,9 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="ftco-nav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
-              <a href="index.html" className="nav-link">
+              <Link to="/" className="nav-link">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item dropdown">
               <a
@@ -40,42 +41,42 @@ const Header = () => {
                 Shop
               </a>
               <div className="dropdown-menu" aria-labelledby="dropdown04">
-                <a className="dropdown-item" href="shop.html">
+                <Link className="dropdown-item" to="VegetableShop">
                   Shop
-                </a>
-                <a className="dropdown-item" href="cart.html">
+                </Link>
+                <Link className="dropdown-item" to="mycart">
                   Cart
-                </a>
-                <a className="dropdown-item" href="checkout.html">
+                </Link>
+                <Link className="dropdown-item" to="checkout">
                   Checkout
-                </a>
+                </Link>
               </div>
             </li>
             <li className="nav-item">
-              <a href="about.html" className="nav-link">
+              <Link to="about" className="nav-link">
                 About
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="contact.html" className="nav-link">
+              <Link to="contact" className="nav-link">
                 Contact
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="blog.html" className="nav-link">
+              <Link to="login" className="nav-link">
                 Login
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="blog.html" className="nav-link">
+              <Link to="signup" className="nav-link">
                 SignUP
-              </a>
+              </Link>
             </li>
             <li className="nav-item cta cta-colored">
-              <a href="cart.html" className="nav-link">
+              <Link to="mycart" className="nav-link">
                 <span className="icon-shopping_cart" />
                 [0]
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

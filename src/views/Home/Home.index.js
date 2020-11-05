@@ -1,6 +1,7 @@
 import React from "react";
 import { Vegetables } from "../../shared/Vegetables";
 import Product from "../../components/product/product.index";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (

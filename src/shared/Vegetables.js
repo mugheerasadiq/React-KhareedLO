@@ -2,7 +2,7 @@ export const Vegetables = [
   {
     id: 0,
     name: "Bell Pepper",
-    image: "assests/images/product-1.jpg",
+    image: "../../assests/images/product-1.jpg",
     discount: "true",
     featured: "true",
     orignalPrice: "$180",
@@ -13,7 +13,7 @@ export const Vegetables = [
   {
     id: 1,
     name: "Green Beans",
-    image: "assests/images/product-3.jpg",
+    image: "../../assests/images/product-3.jpg",
     discount: "true",
     featured: "true",
     orignalPrice: "$200",
@@ -24,7 +24,7 @@ export const Vegetables = [
   {
     id: 2,
     name: "Purple Cabbage",
-    image: "assests/images/product-4.jpg",
+    image: "../../assests/images/product-4.jpg",
     discount: "false",
     featured: "true",
     orignalPrice: "$400",
@@ -35,7 +35,7 @@ export const Vegetables = [
   {
     id: 3,
     name: "Tomatoe",
-    image: "assests/images/product-5.jpg",
+    image: "../../assests/images/product-5.jpg",
     discount: "true",
     featured: "true",
     orignalPrice: "$100",
