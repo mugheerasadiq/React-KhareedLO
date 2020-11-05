@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import user from "./user.reducer";
 import product from "./product.reducer";
+import cart from "./cart.reducer";
 
 // Root Reducer.
 export default (history) =>
@@ -9,4 +10,5 @@ export default (history) =>
     router: connectRouter(history),
     user,
     product,
+    cart,
   });

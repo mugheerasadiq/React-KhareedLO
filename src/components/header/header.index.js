@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-const Header = () => {
+const Header = ({ cartData }) => {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -74,8 +75,7 @@ const Header = () => {
             </li>
             <li className="nav-item cta cta-colored">
               <Link to="mycart" className="nav-link">
-                <span className="icon-shopping_cart" />
-                [0]
+                <span className="icon-shopping_cart" />[{cartData.length}]
               </Link>
             </li>
           </ul>
@@ -85,4 +85,10 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  cartData: state.cart.cartData || [],
+});
+
+const mapDispatchToProps = (dispatch) => {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

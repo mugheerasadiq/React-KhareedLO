@@ -1,11 +1,27 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-const Cart = ({ item }) => {
+//services
+import { removeFromCart } from "../../services/cart.services";
+
+const Cart = (props) => {
+  const item = [...props.cartData] || [];
+
+  const removeItem = (key) => (e) => {
+    e.preventDefault();
+
+    let index = item.findIndex((itm) => itm.key === key);
+    item.splice(index, 1);
+
+    props.removeFromCart(item);
+  };
+
   const itemlist = item.map((item) => {
     return (
       <tr className="text-center" key={item.key}>
         <td className="product-remove">
-          <a href="#">
+          <a onClick={removeItem(item.key)}>
             <span className="ion-ios-close" />
           </a>
         </td>
@@ -21,12 +37,13 @@ const Cart = ({ item }) => {
           <h3>{item.name}</h3>
           <p>Far far away, behind the word mountains, far from the countries</p>
         </td>
-        <td className="price">${item.orignalPrice}</td>
-        <td className="quantity">{item.quantity}</td>
+        <td className="price">{item.orignalPrice}</td>
+        <td className="quantity">{item.itemQuantity}</td>
         <td className="total">{item.orignalPrice * item.quantity}</td>
       </tr>
     );
   });
+
   return (
     <div className="row">
       <div className="col-md-12 ">
@@ -50,4 +67,16 @@ const Cart = ({ item }) => {
   );
 };
 
-export default Cart;
+const mapStateToProps = (state) => ({
+  cartData: state.cart.cartData || [],
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      removeFromCart,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

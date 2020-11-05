@@ -7,7 +7,7 @@ const MyCart = () => {
     <div>
       <section className="ftco-section ftco-cart">
         <div className="container">
-          <Cart item={CartData} />
+          <Cart />
           <div className="row">
             <div className="col-12 mt-5 cart-wrap">
               <div className="cart-total mb-3">

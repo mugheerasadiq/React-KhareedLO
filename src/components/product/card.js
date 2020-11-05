@@ -1,11 +1,37 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
+//services
+import { addToCart } from "../../services/cart.services";
 
 const Card = (props) => {
+  const addItem = (item) => (e) => {
+    e.preventDefault();
+
+    //make cart
+    let items = [...props.cartData];
+    let isFound = false;
+
+    //Increasing the count of item if it already exists in a cart
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].id === item.id) {
+        items[i].itemQuantity++;
+        isFound = true;
+        break;
+      }
+    }
+
+    if (!isFound) items.push({ ...item, itemQuantity: 1 });
+
+    return props.addToCart(items);
+  };
+
   const productCards = props.ProductData.map((data) => {
     return (
       <div className="col-md-6 col-lg-3" key={data.id}>
         <div className="product">
-          <a href="#" className="img-prod">
+          <a href="#" classN ame="img-prod">
             <img className="img-fluid" src={data.image} alt={data.name} />
             <span className="status">
               Freshness Level: {data.freshnesslevel}
@@ -35,7 +61,7 @@ const Card = (props) => {
                   </span>
                 </a>
                 <a
-                  href="#"
+                  onClick={addItem(data)}
                   className="buy-now d-flex justify-content-center align-items-center mx-1"
                 >
                   <span>
@@ -61,4 +87,16 @@ const Card = (props) => {
   return productCards;
 };
 
-export default Card;
+const mapStateToProps = (state) => ({
+  cartData: state.cart.cartData || [],
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      addToCart,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
