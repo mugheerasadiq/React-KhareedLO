@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Product from "../../components/product/product.index";
-import { Vegetables } from "../../shared/Vegetables";
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
-const VegetableShop = () => {
+//services
+import { getProducts } from "../../services/product.services";
+
+const VegetableShop = ({ getProducts, productData = [] }) => {
+  const [allVegetables, setAllVegetables] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    const vegs = productData.filter(
+      (item) => item.category.toLowerCase() === "vegetables"
+    );
+    setAllVegetables(vegs);
+  }, [productData]);
+
   return (
     <React.Fragment>
       <div
@@ -48,9 +65,7 @@ const VegetableShop = () => {
             </div>
           </div>
 
-          {console.log(<Product ProductData={Vegetables} />)}
-
-          <Product ProductData={Vegetables} />
+          <Product ProductData={allVegetables || []} />
 
           <div className="row mt-5">
             <div className="col text-center">
@@ -87,4 +102,16 @@ const VegetableShop = () => {
   );
 };
 
-export default VegetableShop;
+const mapStateToProps = (state) => ({
+  productData: state.product.productData || [],
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getProducts,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(VegetableShop);

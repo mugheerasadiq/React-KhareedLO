@@ -1,9 +1,25 @@
-import React from "react";
-import { Vegetables } from "../../shared/Vegetables";
+import React, { useState, useEffect } from "react";
 import Product from "../../components/product/product.index";
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+//services
+import { getProducts } from "../../services/product.services";
 
-const JuiceShop = () => {
+const JuiceShop = ({ getProducts, productData = [] }) => {
+  const [allJuices, setAllJuices] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    const juices = productData.filter(
+      (item) => item.category.toLowerCase() === "juices"
+    );
+    setAllJuices(juices);
+  }, [productData]);
+
   return (
     <div>
       <div
@@ -48,7 +64,7 @@ const JuiceShop = () => {
             </div>
           </div>
 
-          <Product ProductData={Vegetables} />
+          <Product ProductData={allJuices} />
 
           <div className="row mt-5">
             <div className="col text-center">
@@ -85,4 +101,16 @@ const JuiceShop = () => {
   );
 };
 
-export default JuiceShop;
+const mapStateToProps = (state) => ({
+  productData: state.product.productData || [],
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getProducts,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(JuiceShop);

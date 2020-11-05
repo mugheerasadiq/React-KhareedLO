@@ -4,7 +4,7 @@ export const actions = {
 };
 
 // set complete product detail to redux.
-export const setUserData = (data) => ({
+export const setProductData = (data) => ({
   type: actions.SET_PRODUCT_DATA,
   data,
 });
