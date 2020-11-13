@@ -20,13 +20,14 @@ import JuiceShop from "../Shop/JuiceShop";
 import PrivateRoute from "../../components/routes/private_route/private_route.index";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../../store/configureStore";
-
+import ScrollToTop from "../../components/scroll";
 //Connected Router is used to synchronize router history with redux store
 
 const Main = () => {
   return (
     <React.Fragment>
       <ConnectedRouter history={history}>
+        <ScrollToTop />
         <Header />
         <Switch>
           <PublicRoute path="/" component={Home} exact />

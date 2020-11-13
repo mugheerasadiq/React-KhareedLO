@@ -12,39 +12,39 @@ export const removeUserFromLocalStorage = () => {
   localStorage.removeItem("token");
 };
 
-export const verifyUser = (resolve, reject) => {
-  return (dispatch) => {
-    return getRequest("/user/me", null, true)
-      .then(({ data, status }) => {
-        if (status === 200) {
-          const userData = data.data;
-          dispatch(
-            setUserData({
-              ...userData,
-              selectedTeam:
-                userData.teams && userData.teams.length > 0
-                  ? userData.teams[0]
-                  : {},
-            })
-          );
-          resolve(userData);
-        } else {
-          notification.error({
-            message: "Error",
-            description: "Something went wrong while verifying user",
-          });
-          reject();
-        }
-      })
-      .catch((err) => {
-        notification.error({
-          message: "Error",
-          description: "Something went wrong while verifying user",
-        });
-        reject(err);
-      });
-  };
-};
+// export const verifyUser = (resolve, reject) => {
+//   return (dispatch) => {
+//     return getRequest("/user/me", null, true)
+//       .then(({ data, status }) => {
+//         if (status === 200) {
+//           const userData = data.data;
+//           dispatch(
+//             setUserData({
+//               ...userData,
+//               selectedTeam:
+//                 userData.teams && userData.teams.length > 0
+//                   ? userData.teams[0]
+//                   : {},
+//             })
+//           );
+//           resolve(userData);
+//         } else {
+//           notification.error({
+//             message: "Error",
+//             description: "Something went wrong while verifying user",
+//           });
+//           reject();
+//         }
+//       })
+//       .catch((err) => {
+//         notification.error({
+//           message: "Error",
+//           description: "Something went wrong while verifying user",
+//         });
+//         reject(err);
+//       });
+//   };
+// };
 
 /**
  *
@@ -56,7 +56,7 @@ export const verifyUser = (resolve, reject) => {
  */
 export const userLogin = (data, resolve, reject) => {
   return (dispatch) => {
-    return postRequest("user/login", null, false, data)
+    return postRequest("/signin", null, false, data)
       .then(({ data, status }) => {
         if (status === 200) {
           const userData = data.user;
@@ -82,18 +82,15 @@ export const userLogin = (data, resolve, reject) => {
             ? error.response.data.message
             : "Something went wrong";
         // Notify Error
-        notification.error({
-          message: "Error",
-          description: err,
-        });
-        return reject();
+        alert(err);
+        return reject(error);
       });
   };
 };
 
 export const userSignup = (data, resolve, reject) => {
   return (dispatch) => {
-    return postRequest("user/register", null, false, data)
+    return postRequest("/signup", null, false, data)
       .then(({ data, status }) => {
         if (status === 200) {
           const userData = data.user;
@@ -103,17 +100,11 @@ export const userSignup = (data, resolve, reject) => {
               ...userData,
             })
           );
-          notification.success({
-            message: "Signup Success",
-            description: "You are successfully registered to Khareedlo",
-          });
+          alert("You are successfully registered to Khareedlo");
           return resolve(userData);
         } else {
           // Notify Error
-          notification.error({
-            message: "Error",
-            description: "Something went wrong. Internet problem maybe?",
-          });
+          alert("Something went wrong. Internal error");
           return reject();
         }
       })
@@ -124,11 +115,8 @@ export const userSignup = (data, resolve, reject) => {
             ? error.response.data.message
             : "Something went wrong";
         // Notify Error
-        notification.error({
-          message: "Error",
-          description: err,
-        });
-        return reject();
+        alert(err);
+        return reject(error);
       });
   };
 };
@@ -200,5 +188,17 @@ export const resetPassword = (resetPasswordData, resolve, reject) => {
         });
         return reject();
       });
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    console.log("mugheera");
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    dispatch(setUserData(null));
+    setTimeout(() => {
+      window.location = "/";
+    }, 500);
   };
 };

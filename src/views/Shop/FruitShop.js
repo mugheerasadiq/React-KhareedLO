@@ -3,21 +3,34 @@ import Product from "../../components/product/product.index";
 import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Spin } from "antd";
+import { calculateFreshness } from "../../common/discount";
 //services
-import { getProducts } from "../../services/product.services";
+import { getAllProducts } from "../../services/product.services";
 
-const FruitShop = ({ getProducts, productData = [] }) => {
+const FruitShop = ({ getAllProducts, productData = [] }) => {
   const [allFruits, setAllFruits] = useState([]);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
-    getProducts();
+    if (productData.length === 0) {
+      setSpinner(true);
+      return new Promise((resolve, reject) => {
+        return getAllProducts(resolve, reject);
+      })
+        .then(() => {
+          setSpinner(false);
+        })
+        .catch((error) => alert(error));
+    }
   }, []);
 
   useEffect(() => {
     const fruits = productData.filter(
-      (item) => item.category.toLowerCase() === "fruits"
+      (item) => item.category.name.toLowerCase() === "fruit"
     );
     setAllFruits(fruits);
+    calculateFreshness(fruits);
   }, [productData]);
 
   return (
@@ -64,7 +77,9 @@ const FruitShop = ({ getProducts, productData = [] }) => {
             </div>
           </div>
 
-          <Product ProductData={allFruits} />
+          <Spin tip="Loading..." size="large" spinning={spinner}>
+            <Product ProductData={allFruits} />
+          </Spin>
 
           <div className="row mt-5">
             <div className="col text-center">
@@ -108,7 +123,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getProducts,
+      getAllProducts,
     },
     dispatch
   );

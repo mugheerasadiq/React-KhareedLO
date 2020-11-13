@@ -200,10 +200,11 @@ const SignUp = ({ userSignup, history }) => {
       await signup(values);
       console.log(values);
       setTimeout(() => {
-        history.push("/afterSignUP");
+        history.push("/");
       }, 300);
     } catch (error) {
       console.log(error);
+      alert(error);
     }
   };
 

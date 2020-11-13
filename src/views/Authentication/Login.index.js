@@ -86,7 +86,7 @@ const Login = ({ userLogin, history }) => {
     try {
       await login(values);
       setTimeout(() => {
-        history.replace("checkout");
+        history.replace("/");
       }, 300);
     } catch (error) {
       console.log(error);

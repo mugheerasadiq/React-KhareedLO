@@ -1,9 +1,35 @@
-import React from "react";
-import { Vegetables } from "../../shared/Vegetables";
+import React, { useState, useEffect } from "react";
 import Product from "../../components/product/product.index";
 import { Link } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Spin } from "antd";
+import { calculateFreshness } from "../../common/discount";
+//services
+import { getAllProducts } from "../../services/product.services";
 
-const Home = () => {
+const Home = ({ getAllProducts, productData = [] }) => {
+  const [allFeatured, setAllFeatured] = useState([]);
+  const [spinner, setSpinner] = useState(false);
+
+  useEffect(async () => {
+    setSpinner(true);
+    return new Promise((resolve, reject) => {
+      return getAllProducts(resolve, reject);
+    })
+      .then(() => {
+        setSpinner(false);
+      })
+      .catch((error) => alert(error));
+  }, []);
+
+  useEffect(() => {
+    const featured = productData.filter((item) => item.featured === true);
+    setAllFeatured(featured);
+
+    calculateFreshness(featured);
+  }, [productData]);
+
   return (
     <div>
       <div className="col-md-12 heading-section text-center">
@@ -161,7 +187,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="col-md-12 heading-section text-center">
+      {/* <div className="col-md-12 heading-section text-center">
         <span className="subheading mb-5">Vegetables</span>
         <Product ProductData={Vegetables} />
       </div>
@@ -174,14 +200,29 @@ const Home = () => {
       <div className="col-md-12 heading-section text-center">
         <span className="subheading mb-5">Juices</span>
         <Product ProductData={Vegetables} />
-      </div>
+      </div> */}
 
-      <div className="col-md-12 heading-section text-center">
-        <span className="subheading mb-5">Drieds</span>
-        <Product ProductData={Vegetables} />
-      </div>
+      {/* <div className="col-md-12 heading-section text-center"> */}
+      {/* <span className="subheading mb-5"></span> */}
+
+      <Spin tip="Loading..." size="large" spinning={spinner}>
+        <Product ProductData={allFeatured} />
+      </Spin>
+
+      {/* </div> */}
     </div>
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  productData: state.product.productData || [],
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      getAllProducts,
+    },
+    dispatch
+  );
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

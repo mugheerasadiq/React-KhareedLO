@@ -1,6 +1,7 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 //services
 import { removeFromCart } from "../../services/cart.services";
@@ -29,7 +30,7 @@ const Cart = (props) => {
           <div
             className="img"
             style={{
-              backgroundImage: "url(" + item.image + ")",
+              backgroundImage: "url(" + item.imagePath + ")",
             }}
           />
         </td>
@@ -37,13 +38,20 @@ const Cart = (props) => {
           <h3>{item.name}</h3>
           <p>Far far away, behind the word mountains, far from the countries</p>
         </td>
-        <td className="price">{item.orignalPrice}</td>
+        <td className="price">{item.price}</td>
         <td className="quantity">{item.itemQuantity}</td>
-        <td className="total">{item.orignalPrice * item.quantity}</td>
+        <td className="total">{item.price * item.itemQuantity}</td>
       </tr>
     );
   });
 
+  const view = () => {
+    if (!itemlist.length) {
+      return <p style={{ textAlign: "center" }}>Empty cart</p>;
+    } else {
+      return itemlist;
+    }
+  };
   return (
     <div className="row">
       <div className="col-md-12 ">
@@ -59,8 +67,15 @@ const Cart = (props) => {
                 <th>Total</th>
               </tr>
             </thead>
-            <tbody>{itemlist}</tbody>
+            <tbody>{view()}</tbody>
           </table>
+        </div>
+        <div className="row">
+          <p>
+            <Link to="/checkout" className="btn btn-primary py-3 px-4">
+              Proceed to Checkout
+            </Link>
+          </p>
         </div>
       </div>
     </div>

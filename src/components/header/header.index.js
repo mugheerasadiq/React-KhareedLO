@@ -1,8 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { logout } from "../../services/user.services";
+import { bindActionCreators } from "redux";
 
-const Header = ({ cartData }) => {
+const Header = ({ cartData, logout }) => {
+  const verifiedUserView = (logout) => {
+    if (localStorage.getItem("user")) {
+      return (
+        <>
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
+              href="#"
+              id="dropdown04"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Account
+            </a>
+            <div className="dropdown-menu" aria-labelledby="dropdown04">
+              <a className="dropdown-item" onClick={logout}>
+                Sign out
+              </a>
+            </div>
+          </li>
+        </>
+      );
+    } else
+      return (
+        <>
+          <li className="nav-item">
+            <Link to="login" className="nav-link">
+              Login
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="signup" className="nav-link">
+              SignUP
+            </Link>
+          </li>
+        </>
+      );
+  };
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -63,16 +105,7 @@ const Header = ({ cartData }) => {
                 Contact
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="login" className="nav-link">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="signup" className="nav-link">
-                SignUP
-              </Link>
-            </li>
+            {verifiedUserView(logout)}
             <li className="nav-item cta cta-colored">
               <Link to="mycart" className="nav-link">
                 <span className="icon-shopping_cart" />[{cartData.length}]
@@ -89,6 +122,12 @@ const mapStateToProps = (state) => ({
   cartData: state.cart.cartData || [],
 });
 
-const mapDispatchToProps = (dispatch) => {};
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      logout,
+    },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
