@@ -10,6 +10,8 @@ const SignUpFormSchema = Yup.object().shape({
     .min(6, "Address must be at least 6 characters")
     .required("Address is required"),
   city: Yup.string().required("City is required"),
+  phonenumber: Yup.number().required("PhoneNumber is required"),
+  province: Yup.string().required("Province is required"),
   country: Yup.string()
     .min(4, "Country name must be at least 4 characters")
     .required("Country name is required"),

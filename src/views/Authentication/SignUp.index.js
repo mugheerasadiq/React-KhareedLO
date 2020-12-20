@@ -110,6 +110,9 @@ const SignUpForm = ({ onSubmit }) => {
               touched={touched}
               value={values.phonenumber}
             />
+            {errors.phonenumber && touched.phonenumber ? (
+              <div className="text-danger">{errors.phonenumber}</div>
+            ) : null}
           </div>
           {/* <div className="form-group">
             <select
@@ -163,6 +166,9 @@ const SignUpForm = ({ onSubmit }) => {
               touched={touched}
               value={values.province}
             />
+            {errors.province && touched.province ? (
+              <div className="text-danger">{errors.province}</div>
+            ) : null}
           </div>
           <div className="form-group">
             <input

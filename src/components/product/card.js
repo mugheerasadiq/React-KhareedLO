@@ -41,7 +41,7 @@ const Card = (props) => {
           <a href="#" className="img-prod">
             <img className="img-fluid" src={data.imagePath} alt={data.name} />
             <span className="status">
-              Freshness Level: {data.freshnesslevel}
+              Freshness Level: {data.freshnesslevel}%
             </span>
             <div className="overlay"></div>
           </a>

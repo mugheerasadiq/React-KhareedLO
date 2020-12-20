@@ -193,7 +193,6 @@ export const resetPassword = (resetPasswordData, resolve, reject) => {
 
 export const logout = () => {
   return (dispatch) => {
-    console.log("mugheera");
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     dispatch(setUserData(null));
