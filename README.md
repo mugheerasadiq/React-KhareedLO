@@ -21,12 +21,13 @@ The main scope of this application is to sell grocery products which are mention
 
 Main Features
 
-●	Account management
-●	Cart
-●	Offers
-●	Discounts
-●	Admin Panel
-●	Freshness level (if the product is not fresh then a decent amount of discount will be given on that particular product)
+<ul>
+   <li>Account management</li>
+   <li>Cart</li>
+   <li>Offers</li>
+   <li>Admin Panel</li>
+   <li>Freshness level (if the product is not fresh then a decent amount of discount will be given on that particular product<li/>
+</ul>
 
 ## Setup
 
