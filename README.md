@@ -1,4 +1,4 @@
-# Covid Tracker application
+# E-Commerce Grocery Store
 
 <img src = "./public/homePage.png">
 <img src = "./public/about.png">
