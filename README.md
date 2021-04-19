@@ -26,7 +26,7 @@ Main Features
    <li>Cart</li>
    <li>Offers</li>
    <li>Admin Panel</li>
-   <li>Freshness level (if the product is not fresh then a decent amount of discount will be given on that particular product<li/>
+   <li>Freshness level (if the product is not fresh then a decent amount of discount will be given on that particular product</li>
 </ul>
 
 ## Setup
